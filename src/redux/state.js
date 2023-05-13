@@ -3,10 +3,13 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const state = {
-    contacts: [],
+    contacts: {
+        items: [],
+        isLoading: false,
+        error: null
+    },
     filter: '',
 };
-
 const stateSlice = createSlice({
     name: 'state',
     initialState: state,
