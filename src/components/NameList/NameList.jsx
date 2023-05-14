@@ -20,6 +20,7 @@ const NameList = () => {
     const contacts = useSelector(selectContacts);
     const error = useSelector(selectError);
     const loading = useSelector(selectLoading);
+
     const getVisibleName = () => {
         const normalizedName = filter.trim().toLowerCase();
         const filterContacts = contacts.filter(contact =>
@@ -47,21 +48,28 @@ const NameList = () => {
                     />
                 </>
             )}
-            {error && (<Error>
+            {error ? (
+                <>
+                    <Error>
                         Sorry, an error occurred while loading this page. Please
                         try again later
-                    </Error>)}
-            <ContactsList>
-                {getVisibleName().map(({ id, name, number }) => (
-                    <ContactItem key={id}>
-                        <ContactName
-                            id={id}
-                            name={name}
-                            number={number}
-                        />
-                    </ContactItem>
-                ))}
-            </ContactsList>
+                    </Error>
+                </>
+            ) : (
+                <>
+                    <ContactsList>
+                        {getVisibleName().map(({ id, name, number }) => (
+                            <ContactItem key={id}>
+                                <ContactName
+                                    id={id}
+                                    name={name}
+                                    number={number}
+                                />
+                            </ContactItem>
+                        ))}
+                    </ContactsList>
+                </>
+            )}
         </>
     );
 };
