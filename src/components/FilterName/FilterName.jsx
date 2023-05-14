@@ -6,12 +6,12 @@ import {
     FilterImputIcon,
 } from './FilterName.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeFilterContact } from '../../redux/state';
-import { getFilter } from '../../redux/selectors';
+import { changeFilterContact } from '../../redux/filter';
+import { selectFilter } from '../../redux/selectors';
 
 const FilterName = () => {
     const dispatch = useDispatch();
-    const filter = useSelector(getFilter);
+    const filter = useSelector(selectFilter);
     const changeFilter = e => {
         dispatch(changeFilterContact(e.target.value));
     };

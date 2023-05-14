@@ -12,9 +12,9 @@ import {
     ErroText,
     ErrorIcon,
 } from './NameEditor.styled';
-import { addNameContact } from '../../redux/state';
-import { getContacts } from '../../redux/selectors';
+import { selectContacts } from '../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/operations'
 
 const schema = object({
     name: string()
@@ -44,7 +44,7 @@ const NameEditorHookForm = () => {
         },
         resolver: yupResolver(schema),
     });
-    const people = useSelector(getContacts);
+    const people = useSelector(selectContacts);
     const dispatch = useDispatch();
     const addName = (name, number) => {
         const contact = {
@@ -52,7 +52,7 @@ const NameEditorHookForm = () => {
             name,
             number,
         };
-        dispatch(addNameContact(contact));
+        dispatch(addContact(contact));
     };
 
     function removeNonDigits(str) {
